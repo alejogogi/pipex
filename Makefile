@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alejagom <alejagom@student.42.fr>          +#+  +:+       +#+         #
+#    By: alejogogi <alejogogi@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 17:21:35 by alejagom          #+#    #+#              #
-#    Updated: 2025/04/24 19:56:31 by alejagom         ###   ########.fr        #
+#    Updated: 2025/05/26 21:22:24 by alejogogi        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap
+NAME = pipex
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 SRC_DIR = ./src
 SRC = $(wildcard $(SRC_DIR)/*.c) 
 OBJ = $(SRC:.c=.o)
@@ -23,7 +23,7 @@ LIBFT =	$(LIB_DIR)/libft.a
 FT_PRINTF_DIR = ./ft_printf
 FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 
-INCLUDE = include/push_swap.h
+INCLUDE = include/pipex.h
 LIBFT_INCLUDE = libft
 FT_PRINTF_INCLUDE = ft_printf
 
