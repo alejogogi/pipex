@@ -5,56 +5,45 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alejogogi <alejogogi@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 18:29:50 by alejogogi         #+#    #+#             */
-/*   Updated: 2025/06/02 19:18:13 by alejogogi        ###   ########.fr       */
+/*   Created: 2025/06/08 23:04:06 by alejogogi         #+#    #+#             */
+/*   Updated: 2025/06/08 23:10:59 by alejogogi        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	free_list(t_node *head)
+void	free_aux(t_tools *tools, char *cmd_path, char **exec)
 {
-	t_node	*temp;
-	int		i;
-
-	while (head)
-	{
-		temp = head;
-		i = 0;
-		if (temp)
-		{
-			while (temp->agrs[i] != NULL)
-			{
-				free(temp->agrs[i]);
-				i++;
-			}
-			free(temp->agrs);
-		}
-		head = head->next;
-		free(temp);
-	}
+	free(cmd_path);
+	free_split(exec);
+	exit_error(tools);
 }
 
-void	free_tools(t_tools *tools)
-{
-	if (!tools)
-		return ;
-	free_list(tools->commands);
-	// free(tools->infile);
-	// free(tools->outfile);
-	free(tools->flag);
-	free(tools);
-}
-
-void	free_split(char **temp)
+void	free_split(char **split)
 {
 	int	i;
 
 	i = 0;
-	while (temp[i])
+	if (!split)
+		return ;
+	while (split[i])
 	{
-		free(temp[i]);
+		free(split[i]);
 		i++;
 	}
-	free(temp);
+	free(split);
+}
+
+void	exit_error(t_tools *tools)
+{
+	if (tools)
+	{
+		if (tools->infile >= 0)
+			close(tools->infile);
+		if (tools->outfile >= 0)
+			close(tools->outfile);
+		free(tools);
+	}
+	ft_printf("Error\n");
+	exit(EXIT_FAILURE);
 }

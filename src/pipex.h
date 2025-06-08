@@ -6,7 +6,7 @@
 /*   By: alejogogi <alejogogi@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:22:39 by alejogogi         #+#    #+#             */
-/*   Updated: 2025/06/02 20:49:43 by alejogogi        ###   ########.fr       */
+/*   Updated: 2025/06/08 23:05:53 by alejogogi        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../ft_printf/ft_printf.h"
 # include "../libft/libft.h"
-# include "get_next_line.h"
 # include <fcntl.h>
 # include <stdbool.h>
 # include <stdio.h>
@@ -24,31 +23,25 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-typedef struct s_node
-{
-	char			**agrs;
-	struct s_node	*next;
-}					t_node;
-
 typedef struct s_tools
 {
-	t_node			*commands;
-	char			*infile;
-	char			*outfile;
-	char			*flag;
-	char			**temp;
-	int				size;
-}					t_tools;
-// funciones auxiliares
-void				free_split(char **args);
-void				check_file(int ln, char **args, t_tools *tools);
-void				parc_command(int ln, char **args, t_tools *tools);
-void				add_node(t_tools *tools, char **str);
-void				add_node_aux(t_tools *tools, t_node *temp);
+	int	infile;
+	int	outfile;
+}		t_tools;
 
-// liberar memoria
-void				free_tools(t_tools *tools);
-void				free_split(char **temp);
-void				free_list(t_node *head);
+// manage process.
+void	second_child(t_tools *tools, int pipe[2], char **args, char **envp);
+void	first_child(t_tools *tools, int pipe[2], char **args, char **envp);
+void	create_child(t_tools *tools, char **args, char **envp);
+void	create_process(char **args, char **envp);
+
+// aux manage process.
+char	*find_executable(char *cmd, char **envp);
+char	*get_path_env(char **envp);
+
+// free mem.
+void	exit_error(t_tools *tools);
+void	free_split(char **split);
+void	free_aux(t_tools *tools, char *cmd_path, char **exec);
 
 #endif
