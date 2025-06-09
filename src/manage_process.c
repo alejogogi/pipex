@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_process.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejogogi <alejogogi@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alejagom <alejagom@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 22:34:46 by alejogogi         #+#    #+#             */
-/*   Updated: 2025/06/08 23:13:27 by alejogogi        ###   ########.fr       */
+/*   Updated: 2025/06/09 16:23:19 by alejagom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	first_child(t_tools *tools, int pipe[2], char **args, char **envp)
 	dup2(tools->infile, STDIN_FILENO);
 	close(tools->infile);
 	dup2(pipe[1], STDOUT_FILENO);
-	close(pipe[1]);
 	exec_cmd = ft_split(args[2], ' ');
 	if (!exec_cmd)
 		exit_error(tools);
@@ -90,13 +89,11 @@ void	create_process(char **args, char **envp)
 	if (!tools)
 		exit_error(NULL);
 	tools->infile = open(args[1], O_RDONLY);
-	if (tools->infile < 0)
+	if (tools->infile == -1)
 		exit_error(tools);
 	tools->outfile = open(args[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (tools->outfile < 0)
-	{
+	if (tools->outfile == -1)
 		exit_error(tools);
-	}
 	create_child(tools, args, envp);
 	close(tools->infile);
 	close(tools->outfile);

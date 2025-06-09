@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejogogi <alejogogi@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alejagom <alejagom@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 20:01:00 by alejogogi         #+#    #+#             */
-/*   Updated: 2025/06/08 23:10:54 by alejogogi        ###   ########.fr       */
+/*   Updated: 2025/06/09 16:03:04 by alejagom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,33 @@ char	*find_executable(char *cmd, char **envp)
 	return (NULL);
 }
 
+void	check_empty_arg(char **args)
+{
+	char	**temp;
+
+	temp = ft_split(args[2], ' ');
+	if (!temp || !temp[0] || temp[0][0] == '\0')
+	{
+		ft_printf("Error\n");
+		free_split(temp);
+		return ;
+	}
+	free_split(temp);
+	temp = ft_split(args[3], ' ');
+	if (!temp || !temp[0] || temp[0][0] == '\0')
+	{
+		ft_printf("Error\n");
+		free_split(temp);
+		return ;
+	}
+	free_split(temp);
+}
+
 int	main(int ln, char **args, char **envp)
 {
 	if (ln != 5)
 		return (ft_printf("Error\n"));
+	check_empty_arg(args);
 	create_process(args, envp);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejogogi <alejogogi@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alejagom <alejagom@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:22:39 by alejogogi         #+#    #+#             */
-/*   Updated: 2025/06/08 23:05:53 by alejogogi        ###   ########.fr       */
+/*   Updated: 2025/06/09 16:02:48 by alejagom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ char	*get_path_env(char **envp);
 void	exit_error(t_tools *tools);
 void	free_split(char **split);
 void	free_aux(t_tools *tools, char *cmd_path, char **exec);
+void	chec_empty_arg(char **args);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_mem.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejogogi <alejogogi@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alejagom <alejagom@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 23:04:06 by alejogogi         #+#    #+#             */
-/*   Updated: 2025/06/08 23:10:59 by alejogogi        ###   ########.fr       */
+/*   Updated: 2025/06/09 16:24:35 by alejagom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,8 @@ void	exit_error(t_tools *tools)
 {
 	if (tools)
 	{
-		if (tools->infile >= 0)
-			close(tools->infile);
-		if (tools->outfile >= 0)
-			close(tools->outfile);
 		free(tools);
 	}
-	ft_printf("Error\n");
+	ft_putstr_fd("Error\n", 2);
 	exit(EXIT_FAILURE);
 }
