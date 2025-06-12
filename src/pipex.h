@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejagom <alejagom@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alejogogi <alejogogi@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:22:39 by alejogogi         #+#    #+#             */
-/*   Updated: 2025/06/09 16:02:48 by alejagom         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:11:55 by alejogogi        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,27 @@
 
 typedef struct s_tools
 {
-	int	infile;
-	int	outfile;
-}		t_tools;
+	int		infile;
+	int		outfile;
+	char	*abs_path;
+	char	*path_env;
+	char	*full_path;
+}			t_tools;
 
 // manage process.
-void	second_child(t_tools *tools, int pipe[2], char **args, char **envp);
-void	first_child(t_tools *tools, int pipe[2], char **args, char **envp);
-void	create_child(t_tools *tools, char **args, char **envp);
-void	create_process(char **args, char **envp);
+void		second_child(t_tools *tools, int pipe[2], char **args, char **envp);
+void		first_child(t_tools *tools, int pipe[2], char **args, char **envp);
+void		create_child(t_tools *tools, char **args, char **envp);
+void		create_process(char **args, char **envp);
 
 // aux manage process.
-char	*find_executable(char *cmd, char **envp);
-char	*get_path_env(char **envp);
+char		*find_executable(char *cmd, char **envp, t_tools *tools);
+char		*get_path_env(char **envp);
 
 // free mem.
-void	exit_error(t_tools *tools);
-void	free_split(char **split);
-void	free_aux(t_tools *tools, char *cmd_path, char **exec);
-void	chec_empty_arg(char **args);
+void		exit_error(t_tools *tools);
+void		free_split(char **split);
+void		free_aux(t_tools *tools, char *cmd_path, char **exec);
+void		chec_empty_arg(char **args);
 
 #endif

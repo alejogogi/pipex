@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_process.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejagom <alejagom@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alejogogi <alejogogi@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 22:34:46 by alejogogi         #+#    #+#             */
-/*   Updated: 2025/06/09 16:23:19 by alejagom         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:04:29 by alejogogi        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	second_child(t_tools *tools, int pipe[2], char **args, char **envp)
 	exe_cmd = ft_split(args[3], ' ');
 	if (!exe_cmd)
 		exit_error(tools);
-	cmd_path = find_executable(exe_cmd[0], envp);
+	cmd_path = find_executable(exe_cmd[0], envp, tools);
 	if (!cmd_path)
 	{
 		free_split(exe_cmd);
@@ -47,7 +47,7 @@ void	first_child(t_tools *tools, int pipe[2], char **args, char **envp)
 	exec_cmd = ft_split(args[2], ' ');
 	if (!exec_cmd)
 		exit_error(tools);
-	cmd_path = find_executable(exec_cmd[0], envp);
+	cmd_path = find_executable(exec_cmd[0], envp, tools);
 	if (!cmd_path)
 	{
 		free_split(exec_cmd);

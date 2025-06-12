@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejagom <alejagom@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alejogogi <alejogogi@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 20:01:00 by alejogogi         #+#    #+#             */
-/*   Updated: 2025/06/09 16:03:04 by alejagom         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:14:01 by alejogogi        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,33 +37,31 @@ char	*check_absolute_path(char *cmd)
 	return (NULL);
 }
 
-char	*find_executable(char *cmd, char **envp)
+char	*find_executable(char *cmd, char **envp, t_tools *tools)
 {
-	char	*path_env;
 	char	**paths;
-	char	*full_path;
-	char	*abs_path;
+	char	*temp;
 	int		i;
 
 	i = 0;
-	abs_path = check_absolute_path(cmd);
-	if (abs_path)
-		return (abs_path);
-	path_env = get_path_env(envp);
-	if (!path_env)
+	tools->abs_path = check_absolute_path(cmd);
+	if (tools->abs_path)
+		return (tools->abs_path);
+	tools->path_env = get_path_env(envp);
+	if (!tools->path_env)
 		return (NULL);
-	paths = ft_split(path_env, ':');
+	paths = ft_split(tools->path_env, ':');
 	while (paths[i])
 	{
-		full_path = ft_strjoin(paths[i], "/");
-		full_path = ft_strjoin(full_path, cmd);
-		if (access(full_path, X_OK) == 0)
-			return (full_path);
-		free(full_path);
+		temp = ft_strjoin(paths[i], "/");
+		tools->full_path = ft_strjoin(temp, cmd);
+		free(temp);
+		if (access(tools->full_path, X_OK) == 0)
+			return (free_split(paths), tools->full_path);
+		free(tools->full_path);
 		i++;
 	}
-	free_split(paths);
-	return (NULL);
+	return (free_split(paths), NULL);
 }
 
 void	check_empty_arg(char **args)
