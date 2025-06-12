@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alejogogi <alejogogi@student.42.fr>        +#+  +:+       +#+         #
+#    By: alejagom <alejagom@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 17:21:35 by alejagom          #+#    #+#              #
-#    Updated: 2025/05/26 21:22:24 by alejogogi        ###   ########.fr        #
+#    Updated: 2025/06/09 17:37:32 by alejagom         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = pipex
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 SRC_DIR = ./src
-SRC = $(wildcard $(SRC_DIR)/*.c) 
+SRC = ./src/free_mem.c ./src/manage_process.c ./src/pipex.c
 OBJ = $(SRC:.c=.o)
 
 LIB_DIR = ./libft
